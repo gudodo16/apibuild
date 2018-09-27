@@ -1,0 +1,35 @@
+<?php 
+// src/Model/Entity/User.php
+namespace App\Model\Entity;
+
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\ORM\Entity;
+
+class User extends Entity
+{
+
+    // Make all fields mass assignable except for primary key field "id".
+    protected $_accessible = [
+        '*' => true,
+        'id' => true
+    ];
+
+    // ...
+
+    protected function _setPassword($password)
+    {
+
+        if (strlen($password) > 0) {
+            return (new DefaultPasswordHasher)->hash($password);
+        }
+    }
+
+
+    // protected  function _getStatus($status)
+    // {
+    //    $status = strtoupper($status);
+    //    return ($status == 'W') ? 'ไม่สามารถใช้งาน' : ($status == 'Y') ? 'ใช้งานได้' : '';
+    // }
+
+    // ...
+}
